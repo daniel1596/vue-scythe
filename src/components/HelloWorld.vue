@@ -3,7 +3,7 @@
 		<h2>{{ titleMessage }}</h2>
 		<h4>Installed CLI Plugins</h4>
 		<ul>
-			<li v-for="(url, title) in urls"> <a :href="url">{{ title }}</a></li>
+			<li v-for="url in urls"> <a :href="url">{{ url }}</a></li>
 		</ul>
 	</div>
 </template>
@@ -17,13 +17,14 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 class Url {
-	constructor(title: string, url: string) {}
+	constructor(title: string, href: string) {}
 }
 
 @Component
 export default class HelloWorld extends Vue {
 	private titleMessage: string = "vue app";
-	urls: Url[] = [];
+	
+	urls: Url[] = []; // NOTE: this is still not working :(
 	
 	constructor() {
 		super();
