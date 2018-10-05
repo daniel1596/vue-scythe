@@ -1,5 +1,5 @@
-# vue-website
-Playing around with Vue to make a basic website
+NOTE - I might just create a new project at home. I don't think I want to be syncing node_modules anyway.
+
 
 
 Just use the vue-website thing that's started. Yeah, it's ok if you have to run it in NPM. That's actually seemingly necessary. But it's ok.
