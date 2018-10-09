@@ -14,6 +14,12 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 export default class GameBoard extends Vue {
 	width: number = 400; // want to go ahead and make these as attributes of Vue instance/class
 	height: number = 400;
+	// radius: number = 30;
+	// gapBetweenHexesX: number = Math.sqrt(3)*radius/2
+	// gapBetweenHexesY: number = 3*radius/2
+	// factoryOffset: number = 80;
+	
+	
   //@Prop() tile: LandTile;
   // set tile array through game board service
 
@@ -53,8 +59,8 @@ export default class GameBoard extends Vue {
   
   mounted() {
     // main game loop - while 1, essentially
-	let radius = 30; // this could be a member of the class ("this.radius")
-	let factoryOffset = 80; // same here
+	let radius = 30; // needs to be a member of the class ("this.radius")
+	let factoryOffset = 80; // also should be a member of the class
 	
 	this.drawHex(factoryOffset, factoryOffset, radius);
 	this.drawHex(factoryOffset - (Math.sqrt(3)*radius/2), factoryOffset-(3*radius/2), radius);
@@ -64,6 +70,11 @@ export default class GameBoard extends Vue {
 	this.drawHex(factoryOffset - (Math.sqrt(3)*radius/2), factoryOffset+(3*radius/2), radius);
 	this.drawHex(factoryOffset - (Math.sqrt(3)*radius), factoryOffset, radius);
   }
+  
+  drawHexesInitial() {}
+  
+  // to make things more readable - use an enum for something like Direction.LEFT, Direction.TOP_LEFT, TOP_RIGHT, RIGHT, etc.
+  // enums in TypeScript: https://www.typescriptlang.org/docs/handbook/enums.html
 }
 </script>
 
