@@ -19,5 +19,4 @@ export default class SplashScreen extends Vue {
     	document.getElementById(this.gameBoardId).classList.toggle("d-none");
   	}
 }
-
 </script>

@@ -13,13 +13,17 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class GameBoard extends Vue {
-  
-
   //@Prop() tile: LandTile;
   // set tile array through game board service
+
+  // Note - want to outsource the code to set up the initial game board to something else. (What?)
+
+  mounted() {
+    // main game loop - while 1, essentially
+  }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style lang="scss">
 </style>
