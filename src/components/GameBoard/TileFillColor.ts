@@ -1,4 +1,5 @@
 enum TileFillColor {
+	RED = "#000",  // for village
 	SILVER = "#ddd",
 	YELLOW = "#aaa"  // not really yellow but can solve that later
 }
