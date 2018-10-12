@@ -11,7 +11,7 @@
 
 <script lang="ts">
   import { Component, Vue } from "vue-property-decorator";
-  import GameBoard from "./components/GameBoard.vue";
+  import GameBoard from "./components/GameBoard/GameBoard.vue";
   import SplashScreen from "./components/SplashScreen.vue";
 
   @Component({
