@@ -10,6 +10,8 @@ import LandTile from "./Tile";
 import TileBorderColor from './TileBorderColor';
 import TileFillColor from "./TileFillColor";
 
+
+
 @Component
 export default class GameBoard extends Vue {
   canvasWidth: number = 800;
@@ -27,11 +29,14 @@ export default class GameBoard extends Vue {
   currentCenterX: number = this.topLeftCanvasX; 
   currentCenterY: number = this.topLeftCanvasY;
 
+
   beginRow(row: number) {
-    this.moveTo(0, (row - 1) * this.gapBetweenRowsY, true) // does 1-based row indexing
+    // the "row - 1" calls for 1-based row indexing
+    this.moveTo(0, (row - 1) * this.gapBetweenRowsY, true)
   }
 
   drawLine(x: number, y: number) {
+    // accounting for the topLeftCanvas offset
     this.context.lineTo(this.topLeftCanvasX + x, this.topLeftCanvasY + y);
   }
 
@@ -95,6 +100,8 @@ export default class GameBoard extends Vue {
     this.drawHex();
     this.moveRight();
     this.drawHex();
+
+    //this.beginRow(4);
   }
 
   moveRight(howManyTiles: number=1) {

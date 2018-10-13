@@ -9,7 +9,13 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
+//import mixins from "vue-class-component";
+//import CanvasMixin from '../mixins/CanvasMixin'
+
 @Component()
+//export default class SplashScreen extends mixins(CanvasMixin) {
+// todo NOTE - the mixin stuff didn't work. :(
+
 export default class SplashScreen extends Vue {
 	gameName: string = "Scythe"; // do NOT use the Prop() decorator here
 	@Prop() gameBoardId: string; // this NEEDS to be a prop because it's getting passed from the parent

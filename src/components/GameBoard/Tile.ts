@@ -39,10 +39,14 @@ class LakeTile implements HexagonTile {
 	constructor(public centerX: number, public centerY: number, public borderColor: string) {}
 }
 
-export default LandTile;
-// todo: this technically works, but now it only exports that one class from this file!
-// maybe eventually these will all be moved to their own separate files anyway, so it won't matter
-// I guess then I'd just have to separate files a little more with the different tiles
+// This seems to allow us to export multiple things instead of just doing "export default"
+module.exports = {
+	LakeTile,
+	LandTile
+};
+
+//export default LandTile;
+
 
 // On modules in TypeScript - if needed: https://www.typescriptlang.org/docs/handbook/modules.html
 // Also for a finally good fleshed-out app example in TS: https://github.com/johnpapa/vue-heroes/tree/typescript/client
