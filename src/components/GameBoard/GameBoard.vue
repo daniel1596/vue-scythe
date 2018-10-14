@@ -11,8 +11,16 @@ import TileBorderColor from './TileBorderColor';
 import TileFillColor from "./TileFillColor";
 
 
+// Notes on this - for later 
+// May decide to import the initial board configuration from a db but only for initial setup? not sure.
 
-@Component
+// Also considering moving the low-level details, including the <canvas> element, to a separate comp.
+//  leaving the higher-level logic in this comp ("tiles")
+//  and then the lower-level front-end process (drawing the tiles) in a GameBoardCanvas element
+//  or something like that.
+
+
+@Component() // may need { components: Comp1 } inside the Component constructor eventually
 export default class GameBoard extends Vue {
   canvasWidth: number = 800;
   canvasHeight: number = 800;
