@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <SplashScreen id="splashContainer" :gameBoardId="gameBoardId" class="d-none" />
+    <SplashScreen id="splashContainer" :gameBoardId="gameBoardId" class="d-none"/>
     <GameBoard :id="gameBoardId" />
     <div>
       <!-- don't need this to display right now, but maybe one day -->

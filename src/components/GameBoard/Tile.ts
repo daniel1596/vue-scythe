@@ -1,6 +1,11 @@
 interface Tile {
 	centerX: number
 	centerY: number
+	
+	draw(): void; // I think it will be best to do something like this.
+	// We don't really need a "drawHex()" method for the hexagons.
+	// We just really want all tiles to have a draw() method.
+	// Likely implementation: Tile[] array then call tile.draw() on each tile.
 }
 
 interface HexagonTile extends Tile {
@@ -8,39 +13,48 @@ interface HexagonTile extends Tile {
 	fillColor: string
 	canProduceResources: boolean
 	// These tiles will have border colors - red (tunnels), blue (river/lake), black? (normal)
-
-	drawHex(): void; // Note - using centerX and centerY parameters
 }
 
 class CharacterStartTile implements Tile {
-	constructor(public centerX: number, public centerY: number) {}
+	// faction parameter will eventually be strongly typed
+	constructor(public centerX: number, public centerY: number, faction: string) {}
 
-	drawCharacterStartTile(faction: string) {}  // faction parameter would eventually be strongly typed
+	draw() {
+
+	}
 }
 
 class LandTile implements HexagonTile {
 	canProduceResources = true;
+	// hasEncounterToken = false;
+	// isTunnel = false;
 
-	drawHex(): void {
-		// set fillColor to whatever - you get the idea
-	}
-	// seems like the implements thing is necessary
+	// NOTE - instead of borderColor and fillColor as parameters...
+	// (1) fill color will be determined by resources
+	// (2) border colors... are trickier. Make all black for now. But eventually will have to think about rivers.
+
 	constructor(public centerX: number, public centerY: number, public borderColor: string, public fillColor: string) {}
+
+	draw() { 
+		
+	}
 }
 
 class LakeTile implements HexagonTile {
 	canProduceResources = false;
-	fillColor = "blue"; // whatever the actual string will be
+	borderColor = "probably all blue since it's a lake; that's probably all there is to it"
+	fillColor = "blue"; // whatever the actual string will be - probably 3 digit hex
 
-	drawHex(): void {
+	constructor(public centerX: number, public centerY: number) {}
+
+	draw() {
 
 	}
-
-	constructor(public centerX: number, public centerY: number, public borderColor: string) {}
 }
 
 // This seems to allow us to export multiple things instead of just doing "export default"
 module.exports = {
+	CharacterStartTile,
 	LakeTile,
 	LandTile
 };

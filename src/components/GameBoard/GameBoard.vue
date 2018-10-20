@@ -1,5 +1,6 @@
 <template>
   <div> <!-- root element - there can be only one per component -->
+      <p>{{ test}}</p>
       <canvas id="gameBoardCanvas" :width="canvasWidth" :height="canvasHeight"></canvas>
   </div>
 </template>
@@ -9,6 +10,9 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import LandTile from "./Tile";
 import TileBorderColor from './TileBorderColor';
 import TileFillColor from "./TileFillColor";
+
+import mixins from "vue-class-component";
+import CanvasMixin from '../../mixins/CanvasMixin'
 
 
 // Notes on this - for later 
@@ -21,7 +25,8 @@ import TileFillColor from "./TileFillColor";
 
 
 @Component() // may need { components: Comp1 } inside the Component constructor eventually
-export default class GameBoard extends Vue {
+export default class GameBoard extends  mixins(CanvasMixin) {
+//export default class GameBoard extends Vue {
   canvasWidth: number = 800;
   canvasHeight: number = 800;
   hexRadius: number = 30;
