@@ -1,5 +1,5 @@
 enum TileBorderColor {
-	BLACK = "#ddd",
+	BLACK = "#000",
 	RED = "#F00" // not sure if that's right
 }
 

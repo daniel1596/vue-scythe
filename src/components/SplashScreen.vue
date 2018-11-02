@@ -9,7 +9,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
-@Component()
+@Component({})
 export default class SplashScreen extends Vue {
 
 //export default class SplashScreen extends Vue {

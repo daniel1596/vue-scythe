@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import GameBoardTiles from './GameBoardTiles/GameBoardTiles';
+import GameBoardTiles from './GameBoardTiles/GameBoardTiles.vue';
 
 // import mixins from "vue-class-component";
 // import CanvasMixin from '../../mixins/CanvasMixin';

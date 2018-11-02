@@ -1,6 +1,8 @@
 enum TileFillColor {
-	RED = "#000",  // for village
-	SILVER = "#ddd",
+	NONE = "#FFF",  // Note - may not keep this forever, but at least will keep as default for now
+	BLUE = "#00F", // for lake
+	RED = "#F00",  // for village
+	SILVER = "#ddd",  // metal
 	YELLOW = "#aaa"  // not really yellow but can solve that later
 }
 
