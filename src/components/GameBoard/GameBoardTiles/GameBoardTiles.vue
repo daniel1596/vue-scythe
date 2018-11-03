@@ -29,6 +29,10 @@
 		canvas: any; // defined in mounted() because otherwise this value will be null
 		gameBoardTilesCanvas: GameBoardTilesCanvas;  // also defined in mounted()
 
+		// this value needs to be initialized because otherwise, it won't show up in data
+		//  in the Chrome DevTools for Vue. Weird, but needed. Also it won't hurt anything.
+		tiles: Tile[] = [];
+
 		topLeftCanvasX = 30; // not sure about these... also want to be constant
 		topLeftCanvasY = 30;
 
@@ -36,8 +40,25 @@
 			this.canvas = document.getElementById("gameBoardTilesCanvas");
 			this.gameBoardTilesCanvas = new GameBoardTilesCanvas(this.canvas, this.canvasWidth, this.canvasHeight);
 
-			let tiles: Tile[] = [
-				// NOTE - haven't solved this second part yet... hmm.				
+			this.loadInitialTiles();
+
+			this.tiles.forEach(tile => {
+				this.gameBoardTilesCanvas.drawTile(tile);
+			});
+		}
+
+		loadInitialTiles() {
+			this.tiles = [
+				// TODO - here is a new idea for a "coordinate" system.
+				// the first item would go as new LandTile(1.5, 0, TileFillColor.SILVER)
+				// And the (1.5, 0) coordinates would compute to 
+				//  x = (initOffsetX(=30) + 1.5 * this.gapBetweenColumnsX)
+				//  y = initOffsetY(=30) + (0 * this.gapBetweenRowsY) = 30
+				// Benefit of doing that: that logic (and corresponding variables) is abstracted from here
+				//  and that logic moves into GameBoardTilesCanvas, where it belongs, as nitty-gritty details
+
+				// NOTE - look in GameBoardTilesCanvas to see why CharacterStartTile isn't drawing anything yet. 
+				// It's the "else" condition in drawTile()			
 				// new CharacterStartTile(30 + 1 * this.gapBetweenColumnsX, 30, "Albion"),  // will be strongly typed later,
 				new LandTile(30 + 1.5 * this.gapBetweenColumnsX, 30, TileFillColor.SILVER),
 				new LandTile(30 + 4.5 * this.gapBetweenColumnsX, 30, TileFillColor.SILVER),
@@ -70,10 +91,6 @@
 				new LandTile(30 + 6 * this.gapBetweenColumnsX, 30 + 3*this.gapBetweenRowsY),
 				new LandTile(30 + 7 * this.gapBetweenColumnsX, 30 + 3*this.gapBetweenRowsY),
 			];
-
-			tiles.forEach(tile => {
-				this.gameBoardTilesCanvas.drawTile(tile);
-			});
 		}
 	}
 </script>

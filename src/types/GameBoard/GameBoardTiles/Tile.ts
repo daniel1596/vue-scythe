@@ -34,7 +34,7 @@ export class LandTile implements HexagonTile {
 	// isTunnel = false;
 
 	// NOTE - instead of borderColor and fillColor as parameters...
-	// (1) fill color will be determined by resources
+	// (1) fill color will be determined by resources (enum maybe? but with multiple fields?)
 	// (2) border colors... are trickier. Make all black for now. But eventually will have to think about rivers.
 
 	constructor(public centerX: number, public centerY: number, 

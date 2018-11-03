@@ -2,7 +2,8 @@
   <div> <!-- root element - there can be only one per component -->
     <!-- PopularityTracker -->  
     <GameBoardTiles />
-    <!-- PowerTracker -->      
+    <!-- PowerTracker --> 
+    <!-- PlayerMat --> <!-- probably put decisions for each turn directly on the player mat -->     
   </div>
 </template>
 

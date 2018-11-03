@@ -22,10 +22,16 @@ class GameBoardTilesCanvas extends Canvas {
 			let hexTile = (tile as HexagonTile);  // useful to ensure that it has fillColor and borderColor properties
 			this.drawHex(hexTile.centerX, hexTile.centerY, hexTile.fillColor, hexTile.borderColor);
 		}
+		else {
+			// draw a rectangle or something for now - just to indicate that it's a character start tile
+			// doc: https://www.w3schools.com/tags/ref_canvas.asp
+			
+		}
 	}
 
 	drawHex(centerX: number, centerY: number, fillColor: TileFillColor = TileFillColor.NONE, borderColor: TileBorderColor = TileBorderColor.BLACK) {
 		this.context.strokeStyle = borderColor;
+		this.context.lineWidth = 2;
 		this.context.beginPath();
 
 		this.moveTo(centerX, centerY - this.hexRadius);

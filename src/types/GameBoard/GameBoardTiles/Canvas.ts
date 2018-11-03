@@ -5,13 +5,18 @@ abstract class Canvas {
 		this.context = this.canvas.getContext("2d");  // this will be the case for any canvas
 	}
 
-	lineTo(x: number, y: number) {
-		this.context.lineTo(x, y);
+	drawRect(widthRect: number, heightRect: number) {
+		// Maybe have an optional "isFill" or "fillColor" param
+		// then do this.context.whatever 
 	}
 
 	fill(fillColor: string) {
 		this.context.fillStyle = fillColor;
 		this.context.fill();
+	}
+
+	lineTo(x: number, y: number) {
+		this.context.lineTo(x, y);
 	}
 
 	moveTo(x: number, y: number) {
