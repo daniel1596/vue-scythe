@@ -1,6 +1,5 @@
 <template>
 	<div> <!-- Root element -->
-		<!-- <canvas id="gameBoardCanvas" :width="canvasWidth" :height="canvasHeight" /> -->
 		<canvas id="gameBoardTilesCanvas" :width="canvasWidth" :height="canvasHeight" />
 	</div>
 </template>
@@ -20,7 +19,7 @@
 	@Component({})
 	export default class GameBoardTiles extends Vue {
 		canvasWidth: number = 800;
-		canvasHeight: number = 800;
+		canvasHeight: number = 400;
 
 		hexRadius: number = 30;
 		gapBetweenColumnsX: number = Math.sqrt(3) * this.hexRadius;
@@ -40,25 +39,36 @@
 			let tiles: Tile[] = [
 				// NOTE - haven't solved this second part yet... hmm.				
 				// new CharacterStartTile(30 + 1 * this.gapBetweenColumnsX, 30, "Albion"),  // will be strongly typed later,
-				new LandTile(30 + 1 * this.gapBetweenColumnsX, 30, TileFillColor.SILVER),
-				new LandTile(30 + 4 * this.gapBetweenColumnsX, 30, TileFillColor.SILVER),
+				new LandTile(30 + 1.5 * this.gapBetweenColumnsX, 30, TileFillColor.SILVER),
+				new LandTile(30 + 4.5 * this.gapBetweenColumnsX, 30, TileFillColor.SILVER),
 				
 				// row 2
-				new LandTile(30 + 0.5 * this.gapBetweenColumnsX, 30 + this.gapBetweenRowsY),
-				new LandTile(30 + 1.5 * this.gapBetweenColumnsX, 30 + this.gapBetweenRowsY),
-				new LandTile(30 + 2.5 * this.gapBetweenColumnsX, 30 + this.gapBetweenRowsY),
-				new LandTile(30 + 3.5 * this.gapBetweenColumnsX, 30 + this.gapBetweenRowsY),
-				new LandTile(30 + 4.5 * this.gapBetweenColumnsX, 30 + this.gapBetweenRowsY),
-				new LandTile(30 + 5.5 * this.gapBetweenColumnsX, 30 + this.gapBetweenRowsY),
+				new LandTile(30 + this.gapBetweenColumnsX, 30 + this.gapBetweenRowsY),
+				new LandTile(30 + 2 * this.gapBetweenColumnsX, 30 + this.gapBetweenRowsY),
+				new LandTile(30 + 3 * this.gapBetweenColumnsX, 30 + this.gapBetweenRowsY),
+				new LandTile(30 + 4 * this.gapBetweenColumnsX, 30 + this.gapBetweenRowsY),
+				new LandTile(30 + 5 * this.gapBetweenColumnsX, 30 + this.gapBetweenRowsY),
+				new LandTile(30 + 6 * this.gapBetweenColumnsX, 30 + this.gapBetweenRowsY),
 
 				// row 3
-				new LakeTile(30, 30 + 2 * this.gapBetweenRowsY),
-				new LandTile(30 + this.gapBetweenColumnsX, 30 + 2 * this.gapBetweenRowsY),
-				new LakeTile(30 + 2 * this.gapBetweenColumnsX, 30 + 2 * this.gapBetweenRowsY),
-				new LandTile(30 + 3 * this.gapBetweenColumnsX, 30 + 2 * this.gapBetweenRowsY),
-				new LandTile(30 + 4 * this.gapBetweenColumnsX, 30 + 2 * this.gapBetweenRowsY),
-				new LandTile(30 + 5 * this.gapBetweenColumnsX, 30 + 2 * this.gapBetweenRowsY),
-				new LandTile(30 + 6 * this.gapBetweenColumnsX, 30 + 2 * this.gapBetweenRowsY)
+				new LakeTile(30 + 0.5 * this.gapBetweenColumnsX, 30 + 2 * this.gapBetweenRowsY),
+				new LandTile(30 + 1.5 * this.gapBetweenColumnsX, 30 + 2 * this.gapBetweenRowsY),
+				new LakeTile(30 + 2.5 * this.gapBetweenColumnsX, 30 + 2 * this.gapBetweenRowsY),
+				new LandTile(30 + 3.5 * this.gapBetweenColumnsX, 30 + 2 * this.gapBetweenRowsY, TileFillColor.NONE, TileBorderColor.RED),
+				new LandTile(30 + 4.5 * this.gapBetweenColumnsX, 30 + 2 * this.gapBetweenRowsY),
+				new LandTile(30 + 5.5 * this.gapBetweenColumnsX, 30 + 2 * this.gapBetweenRowsY),
+				new LandTile(30 + 6.5 * this.gapBetweenColumnsX, 30 + 2 * this.gapBetweenRowsY),
+				
+				// row 4
+				// new CharacterStartTile()
+				new LandTile(30, 30 + 3*this.gapBetweenRowsY),
+				new LandTile(30 + this.gapBetweenColumnsX, 30 + 3*this.gapBetweenRowsY),
+				new LandTile(30 + 2 * this.gapBetweenColumnsX, 30 + 3*this.gapBetweenRowsY),
+				new LandTile(30 + 3 * this.gapBetweenColumnsX, 30 + 3*this.gapBetweenRowsY),
+				new LakeTile(30 + 4 * this.gapBetweenColumnsX, 30 + 3*this.gapBetweenRowsY),
+				new LandTile(30 + 5 * this.gapBetweenColumnsX, 30 + 3*this.gapBetweenRowsY),
+				new LandTile(30 + 6 * this.gapBetweenColumnsX, 30 + 3*this.gapBetweenRowsY),
+				new LandTile(30 + 7 * this.gapBetweenColumnsX, 30 + 3*this.gapBetweenRowsY),
 			];
 
 			tiles.forEach(tile => {

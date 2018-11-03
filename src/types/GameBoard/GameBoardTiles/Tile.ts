@@ -48,7 +48,7 @@ export class LandTile implements HexagonTile {
 export class LakeTile implements HexagonTile {
 	canProduceResources = false;
 	borderColor = TileBorderColor.BLACK;
-	fillColor = TileFillColor.BLUE; // whatever the actual string will be - probably 3 digit hex
+	fillColor = TileFillColor.BLUE; 
 
 	constructor(public centerX: number, public centerY: number) {}
 
