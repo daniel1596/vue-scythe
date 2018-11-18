@@ -1,0 +1,53 @@
+<body>
+    <canvas id="myCanvas" width="600" height="600"></canvas>
+</body>
+
+<script>
+	// https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame - another source for doing it
+
+	/* window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.oRequestAnimationFrame; */
+
+	// get canvas and create drawing context
+	var canvas = document.getElementById('myCanvas');
+	var context = canvas.getContext('2d');
+
+	// create image
+	var img = document.createElement("img");
+
+	// or fill image from url
+	img.src = "http://www.w3schools.com/tags/img_the_scream.jpg"
+
+	var xSpeed = 0.4;  //px per ms
+	var ySpeed = 0.3;
+
+	function animate(nowTime, lastTime, xPos, yPos) {
+		if ((img.style.width + xPos) > canvas.width) {
+		   return;
+		}
+		
+		var timeDelta = nowTime - lastTime;
+		var xDelta = xSpeed * timeDelta;
+		var yDelta = ySpeed * timeDelta;
+		
+		// clear
+		context.clearRect(0, 0, canvas.width, canvas.height);
+
+		//draw img
+		context.drawImage(img, xPos, yPos);
+
+		requestAnimationFrame(
+			function(timestamp){
+				animate(timestamp, nowTime, xPos + xDelta, yPos + yDelta)
+			}
+		);
+	}
+
+	animate(0, 0,  10, 1);
+</script>
+
+<style>
+body {
+    margin: 0px;
+    padding: 0px;
+}
+</style>

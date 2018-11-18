@@ -19,7 +19,7 @@
 	@Component({})
 	export default class GameBoardTiles extends Vue {
 		canvasWidth: number = 800;
-		canvasHeight: number = 400;
+		canvasHeight: number = 435;
 
 		hexRadius: number = 30;
 		gapBetweenColumnsX: number = Math.sqrt(3) * this.hexRadius;
@@ -90,6 +90,48 @@
 				new LandTile(30 + 5 * this.gapBetweenColumnsX, 30 + 3*this.gapBetweenRowsY),
 				new LandTile(30 + 6 * this.gapBetweenColumnsX, 30 + 3*this.gapBetweenRowsY),
 				new LandTile(30 + 7 * this.gapBetweenColumnsX, 30 + 3*this.gapBetweenRowsY),
+
+				// row 5
+				new LandTile(30 + 0.5 * this.gapBetweenColumnsX, 30 + 4 * this.gapBetweenRowsY),
+				new LandTile(30 + 1.5 * this.gapBetweenColumnsX, 30 + 4 * this.gapBetweenRowsY),
+				new LakeTile(30 + 2.5 * this.gapBetweenColumnsX, 30 + 4 * this.gapBetweenRowsY),
+				new LandTile(30 + 3.5 * this.gapBetweenColumnsX, 30 + 4 * this.gapBetweenRowsY), // factory!
+				new LandTile(30 + 4.5 * this.gapBetweenColumnsX, 30 + 4 * this.gapBetweenRowsY),
+				new LandTile(30 + 5.5 * this.gapBetweenColumnsX, 30 + 4 * this.gapBetweenRowsY),
+				new LandTile(30 + 6.5 * this.gapBetweenColumnsX, 30 + 4 * this.gapBetweenRowsY),
+
+				// row 6
+				new LandTile(30, 30 + 5 * this.gapBetweenRowsY),
+				new LandTile(30 + this.gapBetweenColumnsX, 30 + 5 * this.gapBetweenRowsY),
+				new LandTile(30 + 2 * this.gapBetweenColumnsX, 30 + 5 * this.gapBetweenRowsY),
+				new LandTile(30 + 3 * this.gapBetweenColumnsX, 30 + 5 * this.gapBetweenRowsY),
+				new LakeTile(30 + 4 * this.gapBetweenColumnsX, 30 + 5 * this.gapBetweenRowsY),
+				new LandTile(30 + 5 * this.gapBetweenColumnsX, 30 + 5 * this.gapBetweenRowsY),
+				new LakeTile(30 + 6 * this.gapBetweenColumnsX, 30 + 5 * this.gapBetweenRowsY),
+
+				// row 7
+				new LandTile(30 + 0.5 * this.gapBetweenColumnsX, 30 + 6 * this.gapBetweenRowsY),
+				new LandTile(30 + 1.5 * this.gapBetweenColumnsX, 30 + 6 * this.gapBetweenRowsY),
+				new LandTile(30 + 2.5 * this.gapBetweenColumnsX, 30 + 6 * this.gapBetweenRowsY),
+				new LandTile(30 + 3.5 * this.gapBetweenColumnsX, 30 + 6 * this.gapBetweenRowsY),
+				new LandTile(30 + 4.5 * this.gapBetweenColumnsX, 30 + 6 * this.gapBetweenRowsY),
+				new LandTile(30 + 5.5 * this.gapBetweenColumnsX, 30 + 6 * this.gapBetweenRowsY),
+				new LandTile(30 + 6.5 * this.gapBetweenColumnsX, 30 + 6 * this.gapBetweenRowsY),
+
+				// row 8
+				new LandTile(30, 30 + 7 * this.gapBetweenRowsY),
+				new LandTile(30 + this.gapBetweenColumnsX, 30 + 7 * this.gapBetweenRowsY),
+				new LakeTile(30 + 2 * this.gapBetweenColumnsX, 30 + 7 * this.gapBetweenRowsY),
+				new LandTile(30 + 3 * this.gapBetweenColumnsX, 30 + 7 * this.gapBetweenRowsY),
+				new LandTile(30 + 4 * this.gapBetweenColumnsX, 30 + 7 * this.gapBetweenRowsY),
+				new LandTile(30 + 5 * this.gapBetweenColumnsX, 30 + 7 * this.gapBetweenRowsY),
+				new LandTile(30 + 6 * this.gapBetweenColumnsX, 30 + 7 * this.gapBetweenRowsY),
+				new LandTile(30 + 7 * this.gapBetweenColumnsX, 30 + 7 * this.gapBetweenRowsY),
+
+
+				// row 9
+				new LandTile(30 + 2.5 * this.gapBetweenColumnsX, 30 + 8 * this.gapBetweenRowsY), // characterstarttile
+				new LandTile(30 + 3.5 * this.gapBetweenColumnsX, 30 + 8 * this.gapBetweenRowsY)
 			];
 		}
 	}
