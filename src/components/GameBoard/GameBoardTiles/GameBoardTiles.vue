@@ -18,7 +18,12 @@
 	
 	@Component({})
 	export default class GameBoardTiles extends Vue {
-		canvasWidth: number = 800;
+		// TODO: would love to define these based partly upon window.innerHeight and window.innerWidth
+		// for my laptop at home (where height of the game board is mostly maxed out): those values are 1266x697
+		//  (goes to 1366x767 if full-screened)
+		// If we did that, the value of hexRadius and the coordinates of the hexes might be a little more dynamic, too, 
+		//   based on screen dimensions.
+		canvasWidth: number = 800;  
 		canvasHeight: number = 435;
 
 		hexRadius: number = 30;
