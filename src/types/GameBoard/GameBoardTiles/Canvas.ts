@@ -5,9 +5,11 @@ abstract class Canvas {
 		this.context = this.canvas.getContext("2d");  // this will be the case for any canvas
 	}
 
-	drawRect(widthRect: number, heightRect: number) {
+	drawRect(x: number, y: number, widthRect: number, heightRect: number) {
 		// Maybe have an optional "isFill" or "fillColor" param
 		// then do this.context.whatever 
+		this.context.rect(x, y, widthRect, heightRect);
+		this.context.stroke();
 	}
 
 	fill(fillColor: string) {

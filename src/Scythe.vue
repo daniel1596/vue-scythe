@@ -3,10 +3,10 @@
     <SplashScreen id="splashContainer" :gameBoardId="gameBoardId" class="d-none"/>
     <GameBoard :id="gameBoardId" />
     <div>	  
-		<!-- maybe buttons here for player mat? Or game controls here? -->
-		<!-- Also said I would try to move a piece around on the board... hmm. -->
-		<button id="endTurn" class="d-none" @click="endTurn()">End turn</button>
-		<button id="endGameButton" class="d-none" @click="endGame()">End game</button>
+      <!-- maybe buttons here for player mat? Or game controls here? -->
+      <!-- Also said I would try to move a piece around on the board... hmm. -->
+      <button id="endTurn" class="d-none" @click="endTurn()">End turn</button>
+      <button :id="endGameButtonId" class="d-none" @click="endGame()">End game</button>
     </div>
   </div>
 </template>
@@ -24,21 +24,28 @@
   })
   export default class Scythe extends Vue {
     gameBoardId: string = "gameBoard"; // this is passed to a "child" component, SplashScreen
-	turnsEnded: number = 1;
+    endGameButtonId: string = "endGameButton";
+	  turnsEnded: number = 1;
 
     endGame() {
-      document.getElementById("endGameButton").classList.toggle("d-none");
-      document.getElementById(this.gameBoardId).classList.toggle("d-none");
+      const endGameButton = document.getElementById(this.endGameButtonId);
+      const gameBoard = document.getElementById(this.gameBoardId);
+
+      for (let element of [endGameButton, gameBoard]) {
+        if (element != null) {  // this null-checking should be totally unnecessary, but keeps the Vue CLI tool happy
+          element.classList.toggle("d-none");
+        }
+      }
     }
 	
-	endTurn() {
-		alert("Player 1 has ended " + this.turnsEnded++ + " turns.");
-	}
-	
-	mounted() {
-		// maybe start the game here?
-		// Will I have a GameService or something?
-	}
+    endTurn() {
+      alert(`Player 1 has ended ${this.turnsEnded++} turns.`)
+    }
+    
+    mounted() {
+      // maybe start the game here?
+      // Will I have a GameService or something?
+    }
   }
 </script>
 

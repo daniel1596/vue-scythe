@@ -5,7 +5,6 @@
 </template>
 
 
-
 <script lang="ts">
 	import { Component, Prop, Vue } from "vue-property-decorator";
 
@@ -19,17 +18,15 @@
 	@Component({})
 	export default class GameBoardTiles extends Vue {
 		// TODO: would love to define these based partly upon window.innerHeight and window.innerWidth
-		// for my laptop at home (where height of the game board is mostly maxed out): those values are 1266x697
-		//  (goes to 1366x767 if full-screened)
+		// for my laptop at home (where height of the game board is mostly maxed out): those values are 1266x697  (goes to 1366x767 if full-screened)
+		// for the work computer, goes to 1920x969 (big width difference; don't think width will be the biggest issue)
 		// If we did that, the value of hexRadius and the coordinates of the hexes might be a little more dynamic, too, 
 		//   based on screen dimensions.
-		canvasWidth: number = 800;  
+		canvasWidth: number = 600;  
 		canvasHeight: number = 435;
 
 		hexRadius: number = 30;
 		gapBetweenColumnsX: number = Math.sqrt(3) * this.hexRadius;
-		// gapBetweenDiagonalHexesX: number = Math.sqrt(3) * this.hexRadius / 2;
-		gapBetweenRowsY: number = 3 * this.hexRadius / 2;
 
 		canvas: any; // defined in mounted() because otherwise this value will be null
 		gameBoardTilesCanvas: GameBoardTilesCanvas;  // also defined in mounted()
@@ -48,95 +45,83 @@
 			this.loadInitialTiles();
 
 			this.tiles.forEach(tile => {
-				this.gameBoardTilesCanvas.drawTile(tile);
+				tile.draw(this.gameBoardTilesCanvas);
 			});
 		}
 
 		loadInitialTiles() {
 			this.tiles = [
-				// TODO - here is a new idea for a "coordinate" system.
-				// the first item would go as new LandTile(1.5, 0, TileFillColor.SILVER)
-				// And the (1.5, 0) coordinates would compute to 
-				//  x = (initOffsetX(=30) + 1.5 * this.gapBetweenColumnsX)
-				//  y = initOffsetY(=30) + (0 * this.gapBetweenRowsY) = 30
-				// Benefit of doing that: that logic (and corresponding variables) is abstracted from here
-				//  and that logic moves into GameBoardTilesCanvas, where it belongs, as nitty-gritty details
-
-				// NOTE - look in GameBoardTilesCanvas to see why CharacterStartTile isn't drawing anything yet. 
-				// It's the "else" condition in drawTile()			
-				// new CharacterStartTile(30 + 1 * this.gapBetweenColumnsX, 30, "Albion"),  // will be strongly typed later,
-				new LandTile(30 + 1.5 * this.gapBetweenColumnsX, 30, TileFillColor.SILVER),
-				new LandTile(30 + 4.5 * this.gapBetweenColumnsX, 30, TileFillColor.SILVER),
+				// row 1
+				new CharacterStartTile(1.5, 0, "Albion"),
+				new CharacterStartTile(4.5, 0, "Nordic"),
 				
 				// row 2
-				new LandTile(30 + this.gapBetweenColumnsX, 30 + this.gapBetweenRowsY),
-				new LandTile(30 + 2 * this.gapBetweenColumnsX, 30 + this.gapBetweenRowsY),
-				new LandTile(30 + 3 * this.gapBetweenColumnsX, 30 + this.gapBetweenRowsY),
-				new LandTile(30 + 4 * this.gapBetweenColumnsX, 30 + this.gapBetweenRowsY),
-				new LandTile(30 + 5 * this.gapBetweenColumnsX, 30 + this.gapBetweenRowsY),
-				new LandTile(30 + 6 * this.gapBetweenColumnsX, 30 + this.gapBetweenRowsY),
+				new LandTile(1, 1),
+				new LandTile(2, 1),
+				new LandTile(3, 1),
+				new LandTile(4, 1),
+				new LandTile(5, 1),
+				new LandTile(6, 1),
 
 				// row 3
-				new LakeTile(30 + 0.5 * this.gapBetweenColumnsX, 30 + 2 * this.gapBetweenRowsY),
-				new LandTile(30 + 1.5 * this.gapBetweenColumnsX, 30 + 2 * this.gapBetweenRowsY),
-				new LakeTile(30 + 2.5 * this.gapBetweenColumnsX, 30 + 2 * this.gapBetweenRowsY),
-				new LandTile(30 + 3.5 * this.gapBetweenColumnsX, 30 + 2 * this.gapBetweenRowsY, TileFillColor.NONE, TileBorderColor.RED),
-				new LandTile(30 + 4.5 * this.gapBetweenColumnsX, 30 + 2 * this.gapBetweenRowsY),
-				new LandTile(30 + 5.5 * this.gapBetweenColumnsX, 30 + 2 * this.gapBetweenRowsY),
-				new LandTile(30 + 6.5 * this.gapBetweenColumnsX, 30 + 2 * this.gapBetweenRowsY),
+				new LakeTile(0.5, 2),
+				new LandTile(1.5, 2),
+				new LakeTile(2.5, 2),
+				new LandTile(3.5, 2, TileFillColor.NONE, TileBorderColor.RED), // Note: might one day have "Mine" as some sort of type?
+				new LandTile(4.5, 2),
+				new LandTile(5.5, 2),
+				new LandTile(6.5, 2),
 				
 				// row 4
-				// new CharacterStartTile()
-				new LandTile(30, 30 + 3*this.gapBetweenRowsY),
-				new LandTile(30 + this.gapBetweenColumnsX, 30 + 3*this.gapBetweenRowsY),
-				new LandTile(30 + 2 * this.gapBetweenColumnsX, 30 + 3*this.gapBetweenRowsY),
-				new LandTile(30 + 3 * this.gapBetweenColumnsX, 30 + 3*this.gapBetweenRowsY),
-				new LakeTile(30 + 4 * this.gapBetweenColumnsX, 30 + 3*this.gapBetweenRowsY),
-				new LandTile(30 + 5 * this.gapBetweenColumnsX, 30 + 3*this.gapBetweenRowsY),
-				new LandTile(30 + 6 * this.gapBetweenColumnsX, 30 + 3*this.gapBetweenRowsY),
-				new LandTile(30 + 7 * this.gapBetweenColumnsX, 30 + 3*this.gapBetweenRowsY),
+				new CharacterStartTile(0, 3, "Polania"),
+				new LandTile(1, 3),
+				new LandTile(2, 3),
+				new LandTile(3, 3),
+				new LakeTile(4, 3),
+				new LandTile(5, 3),
+				new LandTile(6, 3),
+				new CharacterStartTile(7, 3, "Rusviet"),
 
 				// row 5
-				new LandTile(30 + 0.5 * this.gapBetweenColumnsX, 30 + 4 * this.gapBetweenRowsY),
-				new LandTile(30 + 1.5 * this.gapBetweenColumnsX, 30 + 4 * this.gapBetweenRowsY),
-				new LakeTile(30 + 2.5 * this.gapBetweenColumnsX, 30 + 4 * this.gapBetweenRowsY),
-				new LandTile(30 + 3.5 * this.gapBetweenColumnsX, 30 + 4 * this.gapBetweenRowsY), // factory!
-				new LandTile(30 + 4.5 * this.gapBetweenColumnsX, 30 + 4 * this.gapBetweenRowsY),
-				new LandTile(30 + 5.5 * this.gapBetweenColumnsX, 30 + 4 * this.gapBetweenRowsY),
-				new LandTile(30 + 6.5 * this.gapBetweenColumnsX, 30 + 4 * this.gapBetweenRowsY),
+				new LandTile(0.5, 4),
+				new LandTile(1.5, 4),
+				new LakeTile(2.5, 4),
+				new LandTile(3.5, 4), // factory!
+				new LandTile(4.5, 4),
+				new LandTile(5.5, 4),
+				new LandTile(6.5, 4),
 
 				// row 6
-				new LandTile(30, 30 + 5 * this.gapBetweenRowsY),
-				new LandTile(30 + this.gapBetweenColumnsX, 30 + 5 * this.gapBetweenRowsY),
-				new LandTile(30 + 2 * this.gapBetweenColumnsX, 30 + 5 * this.gapBetweenRowsY),
-				new LandTile(30 + 3 * this.gapBetweenColumnsX, 30 + 5 * this.gapBetweenRowsY),
-				new LakeTile(30 + 4 * this.gapBetweenColumnsX, 30 + 5 * this.gapBetweenRowsY),
-				new LandTile(30 + 5 * this.gapBetweenColumnsX, 30 + 5 * this.gapBetweenRowsY),
-				new LakeTile(30 + 6 * this.gapBetweenColumnsX, 30 + 5 * this.gapBetweenRowsY),
+				new LandTile(0, 5),
+				new LandTile(1, 5),
+				new LandTile(2, 5),
+				new LandTile(3, 5),
+				new LakeTile(4, 5),
+				new LandTile(5, 5),
+				new LakeTile(6, 5),
 
 				// row 7
-				new LandTile(30 + 0.5 * this.gapBetweenColumnsX, 30 + 6 * this.gapBetweenRowsY),
-				new LandTile(30 + 1.5 * this.gapBetweenColumnsX, 30 + 6 * this.gapBetweenRowsY),
-				new LandTile(30 + 2.5 * this.gapBetweenColumnsX, 30 + 6 * this.gapBetweenRowsY),
-				new LandTile(30 + 3.5 * this.gapBetweenColumnsX, 30 + 6 * this.gapBetweenRowsY),
-				new LandTile(30 + 4.5 * this.gapBetweenColumnsX, 30 + 6 * this.gapBetweenRowsY),
-				new LandTile(30 + 5.5 * this.gapBetweenColumnsX, 30 + 6 * this.gapBetweenRowsY),
-				new LandTile(30 + 6.5 * this.gapBetweenColumnsX, 30 + 6 * this.gapBetweenRowsY),
+				new LandTile(0.5, 6),
+				new LandTile(1.5, 6),
+				new LandTile(2.5, 6),
+				new LandTile(3.5, 6),
+				new LandTile(4.5, 6),
+				new LandTile(5.5, 6),
+				new LandTile(6.5, 6),
 
 				// row 8
-				new LandTile(30, 30 + 7 * this.gapBetweenRowsY),
-				new LandTile(30 + this.gapBetweenColumnsX, 30 + 7 * this.gapBetweenRowsY),
-				new LakeTile(30 + 2 * this.gapBetweenColumnsX, 30 + 7 * this.gapBetweenRowsY),
-				new LandTile(30 + 3 * this.gapBetweenColumnsX, 30 + 7 * this.gapBetweenRowsY),
-				new LandTile(30 + 4 * this.gapBetweenColumnsX, 30 + 7 * this.gapBetweenRowsY),
-				new LandTile(30 + 5 * this.gapBetweenColumnsX, 30 + 7 * this.gapBetweenRowsY),
-				new LandTile(30 + 6 * this.gapBetweenColumnsX, 30 + 7 * this.gapBetweenRowsY),
-				new LandTile(30 + 7 * this.gapBetweenColumnsX, 30 + 7 * this.gapBetweenRowsY),
-
+				new CharacterStartTile(0, 7, "Saxony"),
+				new LandTile(1, 7),
+				new LakeTile(2, 7),
+				new LandTile(3, 7),
+				new LandTile(4, 7),
+				new LandTile(5, 7),
+				new LandTile(6, 7),
+				new CharacterStartTile(7, 7, "Togawa"),
 
 				// row 9
-				new LandTile(30 + 2.5 * this.gapBetweenColumnsX, 30 + 8 * this.gapBetweenRowsY), // characterstarttile
-				new LandTile(30 + 3.5 * this.gapBetweenColumnsX, 30 + 8 * this.gapBetweenRowsY)
+				new CharacterStartTile(2.5, 8, "Crimea"),
+				new LandTile(3.5, 8)
 			];
 		}
 	}

@@ -23,8 +23,14 @@ export default class SplashScreen extends Vue {
 	}
 
 	clearSplash() {
-		document.getElementById("splashContainer").classList.toggle("d-none");
-    	document.getElementById(this.gameBoardId).classList.toggle("d-none");
+		const splashContainer = document.getElementById("splashContainer");
+		const gameBoard = document.getElementById(this.gameBoardId);
+
+		for (let element of [splashContainer, gameBoard]) {
+			if (element != null) {
+				element.classList.toggle("d-none");
+			}
+		}
   	}
 }
 </script>

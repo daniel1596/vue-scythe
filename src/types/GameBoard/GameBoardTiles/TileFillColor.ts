@@ -1,9 +1,10 @@
 enum TileFillColor {
 	NONE = "#FFF",  // Note - may not keep this forever, but at least will keep as default for now
-	BLUE = "#00F", // for lake
-	RED = "#F00",  // for village
-	SILVER = "#ddd",  // metal
-	YELLOW = "#aaa"  // not really yellow but can solve that later
+	BLUE = "#0D1DF7", // for lake
+	BROWN = "#663300", // wood
+	RED = "#F00",  // village
+	SILVER = "#C0C0C0",  // metal
+	YELLOW = "#FFD700"  // food
 }
 
 export default TileFillColor; 

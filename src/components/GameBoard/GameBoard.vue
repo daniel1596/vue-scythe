@@ -1,9 +1,10 @@
 <template>
   <div> <!-- root element - there can be only one per component -->
-    <!-- PopularityTracker -->  
+     <!-- NOTE - these will each have their own separate canvases -->
+    <!-- <PopularityTracker /> --> 
     <GameBoardTiles />
-    <!-- PowerTracker --> 
-    <!-- PlayerMat --> <!-- probably put decisions for each turn directly on the player mat -->     
+    <!-- <PowerTracker /> --> 
+    <!-- <PlayerMat /> -->
   </div>
 </template>
 
@@ -17,19 +18,12 @@ import GameBoardTiles from './GameBoardTiles/GameBoardTiles.vue';
 // Notes on this - for later 
 // May decide to import the initial board configuration from a db but only for initial setup? not sure.
 
-// Going to create separate "GameBoardTiles" component, nested inside this one
-// That will be the only component in here for now, but eventually, there could be others
-//  such as "PopularityTracker", "PowerTracker", etc.
-// These will each be their own separate canvas; there seems to be no rule that you can't have 
-//  multiple canvases on the same 
-
-
 @Component({
   components: {  // these braces are needed, even if there is only one component
     GameBoardTiles
    }
 }) 
-export default class GameBoard extends Vue {  // mixins(CanvasMixin) 
+export default class GameBoard extends Vue {  // extends mixins(CanvasMixin) 
   
 }
 </script>

@@ -1,35 +1,53 @@
 import Canvas from './Canvas';
-import { Tile, HexagonTile, LandTile } from './Tile';
+import { Tile, HexagonTile, LandTile, CharacterStartTile } from './Tile';
 import TileBorderColor from './TileBorderColor';
 import TileFillColor from './TileFillColor';
 
 
 class GameBoardTilesCanvas extends Canvas {
-	// TODO - these properties all came from the GameBoard.vue file. Will want to move around.
+	// TODO - these properties all came from the GameBoardTiles.vue file. Will want to move around.
 
 	hexRadius: number = 30;
 	gapBetweenHorizontalHexesX: number = Math.sqrt(3) * this.hexRadius;
-	gapBetweenDiagonalHexesX: number = Math.sqrt(3) * this.hexRadius / 2;
+	gapBetweenDiagonalHexesX: number = Math.sqrt(3) * this.hexRadius / 2;  // needed here
 	gapBetweenRowsY: number = 3 * this.hexRadius / 2;
 
 	constructor(public canvas: any, public widthPixels: number, public heightPixels: number) {
 		super(canvas, widthPixels, heightPixels);
 	}
 
+	calculateOffsetX(xCoord: number) {
+		return 30 + xCoord * this.gapBetweenHorizontalHexesX;
+	}
+
+	calculateOffsetY(yCoord: number) {
+		return 30 + yCoord * this.gapBetweenRowsY;
+	}
+
 	drawTile(tile: Tile) {
 		// For now, this seems to be the right conditional check for if it's a hex - see https://stackoverflow.com/a/33733258
-		if ('canProduceResources' in tile) {   
+		if (tile.isHex) {   
 			let hexTile = (tile as HexagonTile);  // useful to ensure that it has fillColor and borderColor properties
-			this.drawHex(hexTile.centerX, hexTile.centerY, hexTile.fillColor, hexTile.borderColor);
+			this.drawHexInternal(hexTile.centerX, hexTile.centerY, hexTile.fillColor, hexTile.borderColor);
 		}
-		else {
-			// draw a rectangle or something for now - just to indicate that it's a character start tile
-			// doc: https://www.w3schools.com/tags/ref_canvas.asp
-			
+		else {			
+			let characterStartTile = (tile as CharacterStartTile);
+			this.drawCharacterStartTile(characterStartTile);
 		}
 	}
 
-	drawHex(centerX: number, centerY: number, fillColor: TileFillColor = TileFillColor.NONE, borderColor: TileBorderColor = TileBorderColor.BLACK) {
+	drawCharacterStartTile(characterStartTile: CharacterStartTile) {
+		// TODO temporary measure to indicate that this is a character start tile and not a normal hex.
+		// This will eventually be a C or, better yet, image of that faction.
+		// doc: https://www.w3schools.com/tags/ref_canvas.asp
+		this.drawRect(characterStartTile.centerX, characterStartTile.centerY, 5, 5); 
+	}
+
+	drawHexTile(hexTile: HexagonTile) {
+		this.drawHexInternal(hexTile.centerX, hexTile.centerY, hexTile.fillColor, hexTile.borderColor);
+	}
+
+	private drawHexInternal(centerX: number, centerY: number, fillColor: TileFillColor = TileFillColor.NONE, borderColor: TileBorderColor = TileBorderColor.BLACK) {
 		this.context.strokeStyle = borderColor;
 		this.context.lineWidth = 2;
 		this.context.beginPath();
