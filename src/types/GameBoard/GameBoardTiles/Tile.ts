@@ -21,8 +21,6 @@ export abstract class Tile {
 export abstract class HexagonTile extends Tile {
 	isHex = true;
 
-	// These tiles will have border colors - red (tunnels), blue (river/lake), black? (normal)
-
 	// TODO - instead of borderColor and fillColor as parameters...
 	// (1) fill color will be determined by resources (enum maybe? but with multiple fields?)
 	// (2) border colors... are trickier. Make all black for now. But eventually will have to think about rivers.
@@ -52,7 +50,7 @@ export class LandTile extends HexagonTile {
 
 export class LakeTile extends HexagonTile {
 	fillColor = TileFillColor.BLUE;
-	borderColor = TileBorderColor.BLACK;
+	borderColor = TileBorderColor.NONE;
 
 	constructor(centerX: number, centerY: number) {
 		super(centerX, centerY, false);
