@@ -3,14 +3,14 @@
      <!-- NOTE - these will each have their own separate canvases -->
     <!-- <PopularityTracker /> --> 
     <GameBoardTiles />
-    <!-- <PowerTracker /> --> 
-    <!-- <PlayerMat /> -->
+    <PlayerMat />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import GameBoardTiles from './GameBoardTiles/GameBoardTiles.vue';
+import PlayerMat from './PlayerMat.vue';
 
 // import mixins from "vue-class-component";
 // import CanvasMixin from '../../mixins/CanvasMixin';
@@ -20,7 +20,8 @@ import GameBoardTiles from './GameBoardTiles/GameBoardTiles.vue';
 
 @Component({
   components: {  // these braces are needed, even if there is only one component
-    GameBoardTiles
+    GameBoardTiles,
+    PlayerMat
    }
 }) 
 export default class GameBoard extends Vue {  // extends mixins(CanvasMixin) 

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h3>{{ gameName }}</h3>
+		<h3>Scythe</h3>
 		<button @click="clearSplash()">Play</button>
 	</div>
 </template>
@@ -13,14 +13,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 export default class SplashScreen extends Vue {
 
 //export default class SplashScreen extends Vue {
-	gameName: string; // do NOT use the Prop() decorator here - and keep this in maybe, for now, just as
-	@Prop() gameBoardId: string; // this NEEDS to be a prop because it's getting passed from the parent
-
-	created() { 
-		// This cannot be in "mounted()", maybe because the template compiles between created() 
-		// and mounted()? Or because it is being called by Scythe, the master component? Weird.
-		this.gameName = "Scythe";
-	}
+	@Prop() gameBoardId: string; // this NEEDS to be a prop because it's getting passed from the parent - can it be initialized? probably shouldn't be...
 
 	clearSplash() {
 		const splashContainer = document.getElementById("splashContainer");

@@ -1,23 +1,25 @@
-import GameBoardTilesCanvas from './GameBoardTilesCanvas';
+import GameBoardTilesCanvas from '../../Canvas/GameBoardTilesCanvas';
 import TileBorderColor from './TileBorderColor';
 import TileFillColor from './TileFillColor';
 
 
+// NOTE: This has to be an abstract class in order have an implemented draw() method (as opposed to an interface)
 export abstract class Tile {
-	// NOTE: This has to be an abstract class in order have an implemented draw() method (can't be interface)
-	// Note that all Tile objects will be drawable
-
 	abstract isHex: boolean;  // abstract keyword can be used here! it means it must be set by children.
 
 	constructor(public centerX: number, public centerY: number) {}
+}
 
-	draw(canvas: GameBoardTilesCanvas): void {
-		this.centerX = canvas.calculateOffsetX(this.centerX);
-		this.centerY = canvas.calculateOffsetY(this.centerY);
-		canvas.drawTile(this);
+export class CharacterStartTile extends Tile {
+	isHex = false;
+	
+	// faction parameter will eventually be strongly typed
+	constructor(centerX: number, centerY: number, faction: string) {
+		super(centerX, centerY);
 	}
 }
 
+/* Everything from this point is or extends HexagonTile */
 export abstract class HexagonTile extends Tile {
 	isHex = true;
 
@@ -30,17 +32,8 @@ export abstract class HexagonTile extends Tile {
 	}
 }
 
-export class CharacterStartTile extends Tile {
-	isHex = false;
-	
-	// faction parameter will eventually be strongly typed
-	constructor(centerX: number, centerY: number, faction: string) {
-		super(centerX, centerY);
-	}
-}
-
 export class LandTile extends HexagonTile {
-	// hasEncounterToken = false;
+	hasUnvisitedEncounterToken = false;
 	// isTunnel = false;
 
 	constructor(centerX: number, centerY: number, fillColor: TileFillColor = TileFillColor.NONE, borderColor: TileBorderColor = TileBorderColor.BLACK) {
@@ -50,7 +43,7 @@ export class LandTile extends HexagonTile {
 
 export class LakeTile extends HexagonTile {
 	fillColor = TileFillColor.BLUE;
-	borderColor = TileBorderColor.NONE;
+	borderColor = TileBorderColor.BLUE;
 
 	constructor(centerX: number, centerY: number) {
 		super(centerX, centerY, false);
