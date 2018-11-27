@@ -1,6 +1,6 @@
-import GameBoardTilesCanvas from '../../Canvas/GameBoardTilesCanvas';
 import TileBorderColor from './TileBorderColor';
 import TileFillColor from './TileFillColor';
+import { Resource, PayableResource } from '@/types/Resource';
 
 
 // NOTE: This has to be an abstract class in order have an implemented draw() method (as opposed to an interface)
@@ -22,6 +22,7 @@ export class CharacterStartTile extends Tile {
 /* Everything from this point is or extends HexagonTile */
 export abstract class HexagonTile extends Tile {
 	isHex = true;
+	resourcesOnTile: PayableResource[] = [];
 
 	// TODO - instead of borderColor and fillColor as parameters...
 	// (1) fill color will be determined by resources (enum maybe? but with multiple fields?)
@@ -30,14 +31,29 @@ export abstract class HexagonTile extends Tile {
 	constructor(centerX: number, centerY: number, public canProduceResources: boolean, public fillColor: TileFillColor = TileFillColor.NONE, public borderColor: TileBorderColor = TileBorderColor.BLACK) {
 		super(centerX, centerY);
 	}
+
+	addResourcesToTile(resourcesToAdd: PayableResource[]) {
+		this.resourcesOnTile.concat(resourcesToAdd);
+	}
+
+	// Would this method go here? I think so?
+	spendResources(resourceType: PayableResource, numberSpending: number) {		
+		let indexToRemove: number = -1;
+		for (let i = 0; i < numberSpending; i++) {
+			indexToRemove = this.resourcesOnTile.findIndex(resource => resource == resourceType);
+
+			// note - this index should never be -1, if implemented properly
+			this.resourcesOnTile.splice(indexToRemove);
+		}
+	}
 }
 
 export class LandTile extends HexagonTile {
 	hasUnvisitedEncounterToken = false;
 	// isTunnel = false;
 
-	constructor(centerX: number, centerY: number, fillColor: TileFillColor = TileFillColor.NONE, borderColor: TileBorderColor = TileBorderColor.BLACK) {
-		super(centerX, centerY, true, fillColor, borderColor);
+	constructor(centerX: number, centerY: number, public resourceToProduce: Resource, borderColor: TileBorderColor = TileBorderColor.BLACK) {
+		super(centerX, centerY, true, resourceToProduce.color, borderColor);
 	}
 }
 

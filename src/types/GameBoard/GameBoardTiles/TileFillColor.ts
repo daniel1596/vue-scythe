@@ -1,6 +1,7 @@
 enum TileFillColor {
 	NONE = "#FFF",  // Note - may not keep this forever, but at least will keep as default for now
-	BLUE = "#0D1DF7", // for lake
+	BLACK = "black", // oil
+	BLUE = "#0D1DF7", // lake
 	BROWN = "#663300", // wood
 	RED = "#F00",  // village
 	SILVER = "#C0C0C0",  // metal
