@@ -1,12 +1,13 @@
 import { CharacterStartTile, LakeTile, LandTile } from '@/types/GameBoard/GameBoardTiles/Tile';
 import TileBorderColor from '@/types/GameBoard/GameBoardTiles/TileBorderColor';
 import { Village, Oil, Metal, Wood, Food } from '@/types/Resource';
+import TileFillColor from '../types/GameBoard/GameBoardTiles/TileFillColor';
 
 export default class TileService {
     getInitialTiles() {
         return [
-            new CharacterStartTile(1.5, 0, "Albion"),
-            new CharacterStartTile(4.5, 0, "Nordic"),
+            new CharacterStartTile(1.5, 0, "Albion", TileFillColor.GREEN, TileBorderColor.BROWN),
+            new CharacterStartTile(4.5, 0, "Nordic", TileFillColor.BLUE, TileBorderColor.BLUE),
             
             new LandTile(1, 1, Metal),
             new LandTile(2, 1, Food),
@@ -23,14 +24,14 @@ export default class TileService {
             new LandTile(5.5, 2, Food),
             new LandTile(6.5, 2, Food),
             
-            new CharacterStartTile(0, 3, "Polania"),
+            new CharacterStartTile(0, 3, "Polania", TileFillColor.NONE, TileBorderColor.RED),
             new LandTile(1, 3, Wood),
             new LandTile(2, 3, Metal, TileBorderColor.RED),
             new LandTile(3, 3, Wood),
             new LakeTile(4, 3),
             new LandTile(5, 3, Wood, TileBorderColor.RED),
             new LandTile(6, 3, Village),
-            new CharacterStartTile(7, 3, "Rusviet"),
+            new CharacterStartTile(7, 3, "Rusviet", TileFillColor.RED, TileBorderColor.BLACK),
 
             new LandTile(0.5, 4, Food),
             new LandTile(1.5, 4, Village),
@@ -56,16 +57,16 @@ export default class TileService {
             new LandTile(5.5, 6, Metal),
             new LandTile(6.5, 6, Oil),
 
-            new CharacterStartTile(0, 7, "Saxony"),
+            new CharacterStartTile(0, 7, "Saxony", TileFillColor.BLACK, TileBorderColor.YELLOW),
             new LandTile(1, 7, Oil),
             new LakeTile(2, 7),
             new LandTile(3, 7, Food),
             new LandTile(4, 7, Metal),
             new LandTile(5, 7, Village),
             new LandTile(6, 7, Food),
-            new CharacterStartTile(7, 7, "Togawa"),
+            new CharacterStartTile(7, 7, "Togawa", TileFillColor.PURPLE, TileBorderColor.NONE),
 
-            new CharacterStartTile(2.5, 8, "Crimea"),
+            new CharacterStartTile(2.5, 8, "Crimea", TileFillColor.YELLOW, TileBorderColor.BLACK),
             new LandTile(3.5, 8, Village)
         ];
     }

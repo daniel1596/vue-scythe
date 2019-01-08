@@ -7,15 +7,17 @@ import { Resource, PayableResource } from '@/types/Resource';
 export abstract class Tile {
 	abstract isHex: boolean;  // abstract keyword can be used here! it means it must be set by children.
 
-	constructor(public centerX: number, public centerY: number) {}
+	constructor(public centerX: number, public centerY: number, 
+		public fillColor: TileFillColor = TileFillColor.NONE, public borderColor: TileBorderColor = TileBorderColor.BLACK) {
+	}
 }
 
 export class CharacterStartTile extends Tile {
 	isHex = false;
 	
 	// faction parameter will eventually be strongly typed
-	constructor(centerX: number, centerY: number, faction: string) {
-		super(centerX, centerY);
+	constructor(centerX: number, centerY: number, faction: string, fillColor: TileFillColor, public borderColor: TileBorderColor) {
+		super(centerX, centerY, fillColor, borderColor);
 	}
 }
 

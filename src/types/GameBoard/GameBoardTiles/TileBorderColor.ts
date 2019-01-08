@@ -1,8 +1,10 @@
 enum TileBorderColor {
-	NONE = "none",  // this is a placeholder - may not be needed but currently used for lakes
+	NONE = "white",  // assuming white background for now
 	BLACK = "#000",
 	BLUE = "blue",
-	RED = "red"
+	BROWN = "brown",
+	RED = "red",
+	YELLOW = "yellow"
 }
 
 export default TileBorderColor; 

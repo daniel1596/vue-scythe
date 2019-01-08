@@ -34,9 +34,9 @@ export default class GameBoardTilesCanvas extends Canvas {
 		return this.topLeftCanvasY + (yCoord * this.gapBetweenRowsY);
 	}
 
-	drawCircleOnGameBoard(x: number, y: number, radius: number, borderColor: TileBorderColor = TileBorderColor.BLACK) {
+	drawCircleOnGameBoard(x: number, y: number, radius: number, fillColor: TileFillColor = TileFillColor.NONE, borderColor: TileBorderColor = TileBorderColor.BLACK) {
 		this.setBorderColor(borderColor);
-		super.drawCircle(x, y, radius)
+		super.fillCircle(fillColor, x, y, radius);
 	}
 
 	drawRectOnGameBoard(xCoord: number, yCoord: number, widthRect: number, heightRect: number, borderColor: TileBorderColor = TileBorderColor.BLACK) {
@@ -63,7 +63,8 @@ export default class GameBoardTilesCanvas extends Canvas {
 
 			// Designate the portions of the power tracker that have icons on them in the game
 			if (index < 1 || index == 7 || index == 16) {
-				this.drawRect(x + index * powerTrackerWidth / 17, y, powerTrackerWidth / 17, powerTrackerHeight / 3);
+				// This isn't the sexiest UI choice, but for now, it'll work
+				this.fillRect("black", x + index * powerTrackerWidth / 17, y, powerTrackerWidth / 17, powerTrackerHeight / 3);
 			}
 		}
 	}
@@ -105,7 +106,7 @@ export default class GameBoardTilesCanvas extends Canvas {
 	}
 
 	drawCharacterStartTile(characterStartTile: CharacterStartTile) {
-		this.drawCircleOnGameBoard(characterStartTile.centerX, characterStartTile.centerY, this.hexRadius / 2);
+		this.drawCircleOnGameBoard(characterStartTile.centerX, characterStartTile.centerY, this.hexRadius / 2, characterStartTile.fillColor, characterStartTile.borderColor);
 	}
 
 	drawHexTile(hexTile: HexagonTile) {
