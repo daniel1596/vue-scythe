@@ -52,8 +52,8 @@ export default abstract class Canvas {
 		this.context.strokeStyle = borderColor;
 	}
 
-	writeText(text: string, x: number, y: number) {
-		this.context.font = "20px Georgia";  // this should be fine, at least for now
+	writeText(text: string, x: number, y: number, fontSize: number=20, font: string="Georgia") {
+		this.context.font = `${fontSize}px ${font}`;
 		this.context.strokeText(text, x, y)
 	}
 }

@@ -8,6 +8,7 @@ export class Resource {
 
 export const Village = new Resource("Village", TileFillColor.RED);
 
+
 export class PayableResource extends Resource {}  // all but villages
 
 export const Oil = new PayableResource("Oil", TileFillColor.BLACK);

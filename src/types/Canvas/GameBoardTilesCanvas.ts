@@ -55,16 +55,22 @@ export default class GameBoardTilesCanvas extends Canvas {
 		const powerTrackerHeight = window.innerHeight / 16;
 		const powerTrackerWidth = window.innerWidth / 7;
 
+		const trackerValuesCount = 16 + 1; // from 0-16, inclusive
+		const widthTrackerItem = powerTrackerWidth / trackerValuesCount;
+
+		// outside rectangle
 		this.setBorderColor(TileBorderColor.BLACK);
 		this.drawRect(x, y, powerTrackerWidth, powerTrackerHeight);
 
-		for (let index = 0; index < 17; index++) {
-			this.drawRect(x + index * powerTrackerWidth / 17, y, powerTrackerWidth / 17, powerTrackerHeight);
+		// inner rectangles - one for each value
+		for (let index = 0; index < trackerValuesCount; index++) {
+			this.drawRect(x + index * widthTrackerItem, y, widthTrackerItem, powerTrackerHeight);
+			this.writeText(index as string, x + index * widthTrackerItem, y + 2*powerTrackerHeight / 3, 15);
 
 			// Designate the portions of the power tracker that have icons on them in the game
 			if (index < 1 || index == 7 || index == 16) {
 				// This isn't the sexiest UI choice, but for now, it'll work
-				this.fillRect("black", x + index * powerTrackerWidth / 17, y, powerTrackerWidth / 17, powerTrackerHeight / 3);
+				this.fillRect("black", x + index * widthTrackerItem, y, widthTrackerItem, powerTrackerHeight / 3);
 			}
 		}
 	}
